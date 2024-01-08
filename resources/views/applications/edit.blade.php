@@ -1,0 +1,63 @@
+@extends('layouts.main')
+@section('content')
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Ubah Application</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Simple Tables</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Horizontal Form -->
+            <form
+                action="/applications/{{ $application->id }}{{ str_replace('/applications/' . $application->id . '/edit', '', request()->getRequestUri()) }}"
+                method="post" class="form-horizontal">
+                @csrf
+                @method('put')
+                <div class="card card-dark card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Form Ubah Application</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Nama Application<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="nama"
+                                    value="{{ $application->name }}" autofocus autocomplete="off" required>
+                                @error('name')
+                                    <small class="text-danger font-italic">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-end">
+                                <a href="/applications" class="btn btn-danger mr-1">Batal</a>
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+@endsection
